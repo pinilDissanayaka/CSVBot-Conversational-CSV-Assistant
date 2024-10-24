@@ -31,7 +31,7 @@ def create_pinecone_index()->None:
 
 
 def load_vector_store(documents):
-
+    try:
         index_name=str(get_config()["vector_store"]["index_name"])
         
         embeddings=get_embeddings()
@@ -44,4 +44,5 @@ def load_vector_store(documents):
         retriever=vector_store.as_retriever()
         
         return retriever
-    
+    except Exception as e:
+        st.error("🚨 Error while loading to the vector store: " + str(e.args))

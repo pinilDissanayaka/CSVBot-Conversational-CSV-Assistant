@@ -14,7 +14,7 @@ st.set_page_config(page_title="CSVBot")
 with st.sidebar:    
     st.write("## Upload Credentials")
     try:
-        if "GROQ_API_KEY" and "PINECONE_API_KEY" in st.secrets:
+        if "GROQ_API_KEY" and "PINECONE_API_KEY" and "GOOGLE_PROJECT_ID" and "GOOGLE_API_KEY" in st.secrets:
             st.success("✅ Credentials saved!")
             load_secrets()
             st.session_state['credentials_saved'] = True
@@ -25,7 +25,11 @@ with st.sidebar:
             
             pinecone_api_key= st.text_input("Pinecone API Key", "", type="password")
             
-            if st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key, pinecone_api_key=pinecone_api_key)):
+            google_api_key = st.text_input("Google API Key", "", type="password")
+            
+            google_project_id = st.text_input("Google Project ID", "", type="password")
+            
+            if st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key, pinecone_api_key=pinecone_api_key, google_api_key=google_api_key, google_project_id=google_project_id)):
                 st.success("✅ Credentials saved!")
                 st.session_state['credentials_saved'] = True
             else:
