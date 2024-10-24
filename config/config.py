@@ -5,7 +5,7 @@ import yaml
 
 def get_config():
     try:
-        config_file_path = "config.yml"
+        config_file_path = "config/config.yml"
         
         with open(config_file_path, 'r') as stream:
             config = yaml.safe_load(stream)
