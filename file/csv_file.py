@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-from langchain_community.document_loaders import CSVLoader, DirectoryLoader
+from langchain_community.document_loaders.csv_loader import CSVLoader
 from langchain_core.documents import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
