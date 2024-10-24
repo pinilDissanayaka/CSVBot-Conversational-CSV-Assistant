@@ -34,7 +34,7 @@ def load_vector_store(documents):
 
         index_name=str(get_config()["vector_store"]["index_name"])
 
-        vector_store=PineconeVectorStore(index_name=index_name)
+        vector_store=PineconeVectorStore(index_name=index_name, embedding=embeddings)
         
         embeddings=get_embeddings()
         
