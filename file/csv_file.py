@@ -4,7 +4,7 @@ from langchain_community.document_loaders import CSVLoader, DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 
-def save_csv(files:list, temp_dir):
+def save_csv(files:list, temp_dir:str):
     try:
         for file in files:
             file_name = file.name
@@ -18,7 +18,7 @@ def save_csv(files:list, temp_dir):
         
         
 
-def load_csv(temp_dir):
+def load_csv(temp_dir:str):
     try:
         loader = DirectoryLoader(path=temp_dir, glob="**/*.csv", loader_cls=CSVLoader, use_multithreading=True)
         documents = loader.load()
@@ -34,8 +34,13 @@ def split_csv(documents):
         return splitted_csv
     except Exception as e:
         st.error("🚨 Error while splitting files: " + str(e.args))
+
+def create_dir(dir="temp"):
+    if not os.path.exists(dir):
+        os.makedirs(dir)
         
-        
+    return dir
+
 def remove_files(temp_dir):
     try:
         list_dir=os.listdir(temp_dir)

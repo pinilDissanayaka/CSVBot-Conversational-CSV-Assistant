@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from secret import load_secrets
-from file import save_csv, load_csv, split_csv, remove_files
+from file import save_csv, load_csv, split_csv, remove_files, create_dir
 from vector_store import create_index, load_vector_store
 from chatbot import chat_with_csv, stream_text
 from tempfile import TemporaryDirectory
@@ -51,11 +51,15 @@ if "credentials_saved" in st.session_state:
         if upload_files:
             if st.button("Submit"):
                 with st.status("Uploading files...", expanded=True):
+                    
+                    st.write("Creating temp directory...")
+                    temp_dir=create_dir(temp_dir="temp")
+                    
                     st.write("Saving files...")
-                    save_csv(files=upload_files, temp_dir="temp")
+                    save_csv(files=upload_files, temp_dir=temp_dir)
                     
                     st.write("Loading files...")
-                    documents=load_csv(temp_dir="temp")
+                    documents=load_csv(temp_dir=temp_dir)
 
                     st.write("Splitting files...")
                     splitted_documents=split_csv(documents=documents)
@@ -66,7 +70,8 @@ if "credentials_saved" in st.session_state:
                     st.write("Loading vector store...")
                     retriever=vector_store=load_vector_store(documents=splitted_documents)
                     
-                    remove_files(temp_dir="temp")
+                    st.write("Removing temp directory...")
+                    remove_files(temp_dir=temp_dir)
                     
                     if "retriever" in st.session_state:
                         st.session_state['retriever'] = retriever
