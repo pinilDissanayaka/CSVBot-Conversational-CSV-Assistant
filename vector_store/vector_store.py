@@ -5,7 +5,6 @@ from config import get_config, get_embeddings
 
 
 def create_pinecone_index()->None:
-    try:
         pinecone=Pinecone()
         
         index_name=str(get_config["vector_store"]["index_name"])
@@ -26,9 +25,7 @@ def create_pinecone_index()->None:
         else:
             st.write("⚠️ Index already exists!")
             return index_name
-        
-    except Exception as e:
-        st.error("🚨 Error while creating index: " + str(e.args))
+
 
 def load_vector_store(documents):
     try:
