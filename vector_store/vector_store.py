@@ -39,7 +39,7 @@ def load_vector_store(documents):
 
         vector_store=PineconeVectorStore(index_name=index_name, embedding=embeddings)
                 
-        vector_store.add_documents(documents=documents, embeddings=embeddings)
+        vector_store.from_documents(documents=documents, embeddings=embeddings)
         
         retriever=vector_store.as_retriever()
         
