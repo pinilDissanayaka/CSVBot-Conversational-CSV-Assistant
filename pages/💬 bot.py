@@ -54,7 +54,7 @@ if "credentials_saved" in st.session_state:
                 with st.status("Uploading files...", expanded=True):
                     
                     st.write("Creating temp directory...")
-                    temp_dir=create_dir(temp_dir="temp")
+                    temp_dir=create_dir(dir="temp")
                     
                     st.write("Saving files...")
                     save_csv(files=upload_files, temp_dir=temp_dir)
