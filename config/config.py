@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_groq.chat_models import ChatGroq
 import yaml
 
@@ -16,14 +16,11 @@ def get_config():
 
 def get_embeddings():
     try:
-        model_kwargs = {'device': 'cpu'}
-        encode_kwargs = {'normalize_embeddings': True}
+        embedding_model_name=get_config()["embeddings"]["name"]
         
-        return HuggingFaceEmbeddings(
-            model_name=get_config()["embeddings"]["name"], 
-            model_kwargs=model_kwargs, 
-            encode_kwargs=encode_kwargs
-            )
+        embedding_model=GoogleGenerativeAIEmbeddings(model=embedding_model_name)
+        
+        return embedding_model
     except Exception as e:
         st.error("🚨 Error while loading embeddings: " + str(e.args))
 
