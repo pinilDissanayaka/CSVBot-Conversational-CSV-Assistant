@@ -20,7 +20,7 @@ def get_embeddings():
         encode_kwargs = {'normalize_embeddings': True}
         
         return HuggingFaceEmbeddings(
-            model_name=get_congig()["embeddings"]["name"], 
+            model_name=get_config()["embeddings"]["name"], 
             model_kwargs=model_kwargs, 
             encode_kwargs=encode_kwargs
             )
@@ -29,7 +29,7 @@ def get_embeddings():
 
 def get_llm():
     try:
-        llm = ChatGroq(model=get_congig()["llm"]["name"], temperature=get_congig()["llm"]["temperature"])
+        llm = ChatGroq(model=get_config()["llm"]["name"], temperature=get_config()["llm"]["temperature"])
         return llm
     except Exception as e:
         st.error("🚨 Error while loading llm: " + str(e.args))
