@@ -62,6 +62,7 @@ if "credentials_saved" in st.session_state:
                     
                     st.write("Saving files...")
                     saved_file=save_csv(files=upload_files, temp_dir=temp_dir)
+                    st.write(saved_file)
                     
                     st.write("Loading files...")
                     documents=load_csv(file_paths=saved_file)
