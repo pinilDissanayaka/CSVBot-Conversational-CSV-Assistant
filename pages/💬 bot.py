@@ -1,6 +1,8 @@
 import os
 import streamlit as st
 from secret import load_secrets
+from file import save_csv, load_csv
+from vector_store import create_index, load_vector_store
 from tempfile import TemporaryDirectory
 
 
@@ -45,6 +47,36 @@ if "credentials_saved" in st.session_state:
         except Exception as e:
             st.error("🚨 Error while uploading files: " + str(e.args))
             
+        if upload_files:
+            if st.button("Submit"):
+                with TemporaryDirectory(dir="/") as temp_dir:
+                    with st.status("Uploading files...", expanded=True):
+                        st.write("Saving files...")
+                        save_csv(files=upload_files, temp_dir=temp_dir)
+                        
+                        st.write("Loading files...")
+                        documents=load_csv(temp_dir=temp_dir)
+                        
+                        st.write("Creating index...")
+                        create_index()
+                        
+                        st.write("Loading vector store...")
+                        retriever=vector_store=load_vector_store(documents=documents)
+                        
+                        if "retriever" in st.session_state:
+                            st.session_state['retriever'] = retriever
+                        
+
+        if "retriever" in st.session_state:
+            retriever=st.session_state['retriever']
+
+            if retriever:
+                pass
+            
+            
+else:
+    st.warning("⚠️ Please enter valid credentials!")
+    
 
 
 

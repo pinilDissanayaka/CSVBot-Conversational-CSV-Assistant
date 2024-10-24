@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from langchain_community.document_loaders import CSVLoader, DirectoryLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 
 def save_csv(files:list, temp_dir):
@@ -24,6 +25,15 @@ def load_csv(temp_dir):
         return documents
     except Exception as e:
         st.error("🚨 Error while loading files: " + str(e.args))
+        
+        
+def split_csv(documents):
+    try:
+        splitter=RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200, length_function=len)
+        splitted_csv=splitter.split_documents(documents=documents)
+        return splitted_csv
+    except Exception as e:
+        st.error("🚨 Error while splitting files: " + str(e.args))
         
         
         

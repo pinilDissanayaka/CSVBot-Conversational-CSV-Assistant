@@ -6,3 +6,8 @@ llm:
   name: llama-3.1-70b-versatile
   temperature: 0.78
 
+vector_store:
+  index_name: csvbot
+  metric: cosine
+  dimension: 768
+

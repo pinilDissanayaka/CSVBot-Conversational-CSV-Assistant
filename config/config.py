@@ -3,7 +3,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_groq.chat_models import ChatGroq
 import yaml
 
-def get_congig():
+def get_config():
     try:
         config_file_path = "config.yml"
         
