@@ -72,7 +72,7 @@ CSVBot uses a combination of:
 ## 🤝 Contributing
 Feel free to fork this repo, submit issues, or make pull requests. Any contribution is appreciated! 🙌
 
-##📄 License
+## 📄 License
 This project is licensed under the MIT License.
 
 
