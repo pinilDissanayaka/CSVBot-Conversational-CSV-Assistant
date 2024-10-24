@@ -15,6 +15,7 @@ def save_csv(files:list, temp_dir:str):
             
             with open(save_dir, 'wb') as f:
                 file.write(file.read())
+                st.write(file.read())
                 saved_files.append(save_dir)
                 
         return saved_files
