@@ -52,10 +52,10 @@ if "credentials_saved" in st.session_state:
             if st.button("Submit"):
                 with st.status("Uploading files...", expanded=True):
                     st.write("Saving files...")
-                    save_csv(files=upload_files, temp_dir="/temp")
+                    save_csv(files=upload_files, temp_dir="temp")
                     
                     st.write("Loading files...")
-                    documents=load_csv(temp_dir="/temp")
+                    documents=load_csv(temp_dir="temp")
 
                     st.write("Splitting files...")
                     splitted_documents=split_csv(documents=documents)
@@ -66,7 +66,7 @@ if "credentials_saved" in st.session_state:
                     st.write("Loading vector store...")
                     retriever=vector_store=load_vector_store(documents=splitted_documents)
                     
-                    remove_files(temp_dir="/temp")
+                    remove_files(temp_dir="temp")
                     
                     if "retriever" in st.session_state:
                         st.session_state['retriever'] = retriever
