@@ -84,11 +84,6 @@ if "credentials_saved" in st.session_state:
                     with st.chat_message(message["role"]):
                         st.write(message["content"])
 
-                # Function for generating LLM response
-                def generate_response(prompt_input):
-                    return chat_with_csv(user_input=prompt_input)
-
-
                 # User-provided prompt
                 if prompt := st.chat_input():
                     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -100,7 +95,7 @@ if "credentials_saved" in st.session_state:
                     try:
                         with st.chat_message("assistant"):
                             with st.spinner("Thinking..."):
-                                response = generate_response(prompt) 
+                                response = chat_with_csv(question=prompt, retriever=retriever)
                                 st.write_stream(stream_text(response))
                         message = {"role": "assistant", "content": response}
                         st.session_state.messages.append(message)
