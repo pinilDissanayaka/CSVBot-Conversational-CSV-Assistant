@@ -50,25 +50,24 @@ if "credentials_saved" in st.session_state:
             
         if upload_files:
             if st.button("Submit"):
-                with TemporaryDirectory(dir="/") as temp_dir:
-                    with st.status("Uploading files...", expanded=True):
-                        st.write("Saving files...")
-                        save_csv(files=upload_files, temp_dir=temp_dir)
-                        
-                        st.write("Loading files...")
-                        documents=load_csv(temp_dir=temp_dir)
+                with st.status("Uploading files...", expanded=True):
+                    st.write("Saving files...")
+                    save_csv(files=upload_files, temp_dir="/temp")
+                    
+                    st.write("Loading files...")
+                    documents=load_csv(temp_dir="/temp")
 
-                        st.write("Splitting files...")
-                        splitted_documents=split_csv(documents=documents)
-                        
-                        st.write("Creating index...")
-                        create_index()
-                        
-                        st.write("Loading vector store...")
-                        retriever=vector_store=load_vector_store(documents=splitted_documents)
-                        
-                        if "retriever" in st.session_state:
-                            st.session_state['retriever'] = retriever
+                    st.write("Splitting files...")
+                    splitted_documents=split_csv(documents=documents)
+                    
+                    st.write("Creating index...")
+                    create_index()
+                    
+                    st.write("Loading vector store...")
+                    retriever=vector_store=load_vector_store(documents=splitted_documents)
+                    
+                    if "retriever" in st.session_state:
+                        st.session_state['retriever'] = retriever
                         
 
         if "retriever" in st.session_state:
