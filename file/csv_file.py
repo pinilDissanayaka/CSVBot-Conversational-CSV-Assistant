@@ -1,11 +1,13 @@
 import os
 import streamlit as st
 from langchain_community.document_loaders import CSVLoader, DirectoryLoader
+from langchain_core.documents import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 
 def save_csv(files:list, temp_dir:str):
     try:
+        saved_files=[]
         for file in files:
             file_name = file.name
             
@@ -13,15 +15,23 @@ def save_csv(files:list, temp_dir:str):
             
             with open(save_dir, 'wb') as f:
                 file.write(file.read())
+                saved_files.append(save_dir)
+                
+        return saved_files
     except Exception as e:
         st.error("🚨 Error while saving files: " + str(e.args))
         
         
 
-def load_csv(temp_dir:str):
+def load_csv(file_paths):
     try:
-        loader = DirectoryLoader(path=temp_dir, glob="**/*.csv", loader_cls=CSVLoader, use_multithreading=True)
-        documents = loader.load()
+        documents=[]
+        for file_path in file_paths:
+            loader = CSVLoader(file_path=file_path)
+            file_data = loader.load()
+            
+            for data in file_data:
+                documents.append()
         return documents
     except Exception as e:
         st.error("🚨 Error while loading files: " + str(e.args))
