@@ -1,0 +1,8 @@
+embeddings:
+  name: text-embedding-ada-002
+  dimension: 1536
+
+llm:
+  name: gpt-3.5-turbo
+  temperature: 0
+

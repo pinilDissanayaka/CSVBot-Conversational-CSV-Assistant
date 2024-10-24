@@ -10,24 +10,28 @@ st.set_page_config(page_title="CSVBot")
 #app side bar
 with st.sidebar:    
     st.write("## Upload Credentials")
-    if "GROQ_API_KEY" in st.secrets:
-        st.success("✅ Credentials saved!")
-        load_secrets()
-        st.session_state['credentials_saved'] = True
-    else:
-        st.subheader("Upload the credentials.")
-        
-        groq_api_key = st.text_input("Groq API Key", "", type="password")
-        
-        
-        if st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key)):
+    try:
+        if "GROQ_API_KEY" in st.secrets:
             st.success("✅ Credentials saved!")
+            load_secrets()
             st.session_state['credentials_saved'] = True
         else:
-            st.warning("⚠️ Please enter valid credentials!")
-            st.session_state['credentials_saved'] = False
+            st.subheader("Upload the credentials.")
+            
+            groq_api_key = st.text_input("Groq API Key", "", type="password")
+            
+            
+            if st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key)):
+                st.success("✅ Credentials saved!")
+                st.session_state['credentials_saved'] = True
+            else:
+                st.warning("⚠️ Please enter valid credentials!")
+                st.session_state['credentials_saved'] = False
+                
+    except Exception as e:
+        st.error("🚨 Error while loading secrets: " + str(e.args))
 
-st.title("🦜 Welcome to CSVBot: Your Conversational CSV Assistant")
+st.title("🦜 CSVBot : Your Conversational CSV Assistant")
 
 if "credentials_saved" in st.session_state:
     if st.session_state['credentials_saved']:
@@ -41,8 +45,7 @@ if "credentials_saved" in st.session_state:
         except Exception as e:
             st.error("🚨 Error while uploading files: " + str(e.args))
             
-        
-        
-            
+
+
 
 

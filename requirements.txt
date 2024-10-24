@@ -5,3 +5,6 @@ langchain-huggingface
 langchain_experimental
 langchain_core
 langchain_huggingface
+pyyaml
+pinecone
+
