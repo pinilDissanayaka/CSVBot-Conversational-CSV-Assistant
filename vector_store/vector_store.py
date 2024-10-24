@@ -31,7 +31,7 @@ def create_pinecone_index()->None:
 
 
 def load_vector_store(documents):
-    try:
+
         index_name=str(get_config()["vector_store"]["index_name"])
 
         vector_store=PineconeVectorStore(index_name=index_name)
@@ -43,5 +43,4 @@ def load_vector_store(documents):
         retriever=vector_store.as_retriever()
         
         return retriever
-    except Exception as e:
-        st.error("🚨 Error while loading vector store: " + str(e.args))
+    
