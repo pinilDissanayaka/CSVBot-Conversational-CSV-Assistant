@@ -66,7 +66,6 @@ if "credentials_saved" in st.session_state:
                     
                     st.write("Loading files...")
                     documents=load_csv(file_paths=saved_file)
-                    st.write(documents)
 
                     st.write("Splitting files...")
                     splitted_documents=split_csv(documents=documents)
@@ -75,7 +74,6 @@ if "credentials_saved" in st.session_state:
                     index_name=create_pinecone_index()
                     
                     st.write("Loading vector store...")
-                    st.write(splitted_documents)
                     
                     retriever=vector_store=load_vector_store(documents=splitted_documents, index_name=index_name)
                     

@@ -15,7 +15,6 @@ def save_csv(files:list, temp_dir:str):
             
             with open(save_dir, 'wb') as f:
                 file.write(file.read())
-                st.write(file.read())
                 saved_files.append(save_dir)
                 
         return saved_files
@@ -30,7 +29,6 @@ def load_csv(file_paths):
         for file_path in file_paths:
             loader = CSVLoader(file_path=file_path)
             file_data = loader.load()
-            st.write(file_data)
             
             for data in file_data:
                 documents.append(Document(page_content=data.page_content))
