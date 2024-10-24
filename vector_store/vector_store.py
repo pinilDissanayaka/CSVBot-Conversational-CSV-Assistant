@@ -33,11 +33,12 @@ def create_pinecone_index()->None:
 def load_vector_store(documents):
 
         index_name=str(get_config()["vector_store"]["index_name"])
-
-        vector_store=PineconeVectorStore(index_name=index_name, embedding=embeddings)
         
         embeddings=get_embeddings()
         
+
+        vector_store=PineconeVectorStore(index_name=index_name, embedding=embeddings)
+                
         vector_store.add_documents(documents=documents, embeddings=embeddings)
         
         retriever=vector_store.as_retriever()
