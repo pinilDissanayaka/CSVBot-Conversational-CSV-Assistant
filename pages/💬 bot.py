@@ -14,7 +14,7 @@ st.set_page_config(page_title="CSVBot")
 with st.sidebar:    
     st.write("## Upload Credentials")
     try:
-        if "GROQ_API_KEY" in st.secrets:
+        if "GROQ_API_KEY" and "PINECONE_API_KEY" in st.secrets:
             st.success("✅ Credentials saved!")
             load_secrets()
             st.session_state['credentials_saved'] = True
