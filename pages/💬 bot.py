@@ -23,8 +23,9 @@ with st.sidebar:
             
             groq_api_key = st.text_input("Groq API Key", "", type="password")
             
+            pinecone_api_key= st.text_input("Pinecone API Key", "", type="password")
             
-            if st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key)):
+            if st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key, pinecone_api_key=pinecone_api_key)):
                 st.success("✅ Credentials saved!")
                 st.session_state['credentials_saved'] = True
             else:
