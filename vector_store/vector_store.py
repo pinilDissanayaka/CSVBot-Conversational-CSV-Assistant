@@ -30,13 +30,10 @@ def create_pinecone_index()->None:
         st.error("🚨 Error while creating index: " + str(e.args))
 
 
-def load_vector_store(documents):
-    try:
-        index_name=str(get_config()["vector_store"]["index_name"])
-        
+def load_vector_store(index_name, documents):
+    try:        
         embeddings=get_embeddings()
         
-
         vector_store=PineconeVectorStore(index_name=index_name, embedding=embeddings)
                 
         vector_store.from_documents(documents=documents, embeddings=embeddings)

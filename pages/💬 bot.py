@@ -70,16 +70,16 @@ if "credentials_saved" in st.session_state:
                     splitted_documents=split_csv(documents=documents)
                     
                     st.write("Creating index...")
-                    create_pinecone_index()
+                    index_name=create_pinecone_index()
                     
                     st.write("Loading vector store...")
-                    retriever=vector_store=load_vector_store(documents=splitted_documents)
+                    retriever=vector_store=load_vector_store(documents=splitted_documents, index_name=index_name)
                     
                     st.write("Removing temp directory...")
                     remove_files(temp_dir=temp_dir)
                     
-                    if "retriever" in st.session_state:
-                        st.session_state['retriever'] = retriever
+                if "retriever" in st.session_state:
+                    st.session_state['retriever'] = retriever
                         
 
         if "retriever" in st.session_state:
