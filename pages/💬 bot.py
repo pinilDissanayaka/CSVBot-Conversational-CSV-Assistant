@@ -61,10 +61,10 @@ if "credentials_saved" in st.session_state:
                     temp_dir=create_dir(dir="temp")
                     
                     st.write("Saving files...")
-                    save_csv(files=upload_files, temp_dir=temp_dir)
+                    saved_file=save_csv(files=upload_files, temp_dir=temp_dir)
                     
                     st.write("Loading files...")
-                    documents=load_csv(temp_dir=temp_dir)
+                    documents=load_csv(file_paths=saved_file)
 
                     st.write("Splitting files...")
                     splitted_documents=split_csv(documents=documents)

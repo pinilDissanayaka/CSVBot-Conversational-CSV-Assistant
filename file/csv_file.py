@@ -31,7 +31,8 @@ def load_csv(file_paths):
             file_data = loader.load()
             
             for data in file_data:
-                documents.append()
+                documents.append(Document(page_content=data.page_content))
+
         return documents
     except Exception as e:
         st.error("🚨 Error while loading files: " + str(e.args))
