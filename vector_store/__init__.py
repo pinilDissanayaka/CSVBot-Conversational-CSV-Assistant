@@ -1,1 +1,1 @@
-from .vector_store import load_vector_store, create_index
+from .vector_store import load_vector_store, create_pinecone_index

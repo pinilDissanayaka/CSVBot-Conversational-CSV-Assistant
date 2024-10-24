@@ -4,7 +4,7 @@ from langchain_pinecone import PineconeVectorStore
 from config import get_config, get_embeddings
 
 
-def create_index()->None:
+def create_pinecone_index()->None:
     try:
         pinecone=Pinecone()
         
