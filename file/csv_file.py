@@ -29,6 +29,7 @@ def load_csv(file_paths):
         for file_path in file_paths:
             loader = CSVLoader(file_path=file_path)
             file_data = loader.load()
+            st.write(file_data)
             
             for data in file_data:
                 documents.append(Document(page_content=data.page_content))
