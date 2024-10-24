@@ -65,6 +65,7 @@ if "credentials_saved" in st.session_state:
                     
                     st.write("Loading files...")
                     documents=load_csv(file_paths=saved_file)
+                    st.write(documents)
 
                     st.write("Splitting files...")
                     splitted_documents=split_csv(documents=documents)
