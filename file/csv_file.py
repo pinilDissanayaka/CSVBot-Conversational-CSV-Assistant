@@ -36,4 +36,13 @@ def split_csv(documents):
         st.error("🚨 Error while splitting files: " + str(e.args))
         
         
+def remove_files(temp_dir):
+    try:
+        list_dir=os.listdir(temp_dir)
+        for file in list_dir:
+            os.remove(os.path.join(temp_dir, file))
+    except Exception as e:
+        st.error("🚨 Error while removing files: " + str(e.args))
+        
+        
         
