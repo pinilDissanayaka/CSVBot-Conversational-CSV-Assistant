@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-st.title("Welcome to CSVBot: Your Conversational CSV Assistant")
+st.title("🦜 Welcome to CSVBot: Your Conversational CSV Assistant")
 
 st.write("Simplify your data interactions by chatting directly with your CSV files. With CSVBot, analyzing, transforming, and visualizing data has never been easier. Whether you're a business user or a data analyst, CSVBot empowers you to ask questions, perform operations, and gain insights—all through natural language.")
 
