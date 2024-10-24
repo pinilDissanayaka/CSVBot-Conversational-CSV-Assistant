@@ -4,7 +4,7 @@ langchain_groq
 langchain-huggingface
 langchain_pinecone
 langchain_core
-langchain_huggingface
+langchain-google-genai
 pyyaml
 pinecone
 
