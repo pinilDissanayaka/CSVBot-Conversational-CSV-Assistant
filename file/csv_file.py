@@ -1,6 +1,7 @@
 import os
 import shutil
 import streamlit as st
+import pandas as pd
 from langchain_community.document_loaders.csv_loader import CSVLoader
 from langchain_core.documents import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -12,11 +13,12 @@ def save_csv(files:list, temp_dir:str):
         for file in files:
             file_name = file.name
             
-            save_dir = os.path.join(temp_dir, file_name)
+            save_file = os.path.join(temp_dir, file_name)
             
-            with open(save_dir, 'wb') as f:
-                file.write(file.read())
-                saved_files.append(save_dir)
+            df=pd.read_csv(file)
+            df.to_csv(save_file, index=False)
+            
+            saved_files.append(save_file)
                 
         return saved_files
     except Exception as e:
