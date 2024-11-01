@@ -60,7 +60,6 @@ if "credentials_saved" in st.session_state:
                 with st.status("Uploading files...", expanded=False):
 
                     documents=load_csv(upload_files=upload_files)
-                    st.write(documents)
 
                     splitted_documents=split_csv(documents=documents)
                     
@@ -74,36 +73,34 @@ if "credentials_saved" in st.session_state:
                     st.session_state['retriever'] = get_retriever()
                         
 
-        if "retriever" not in st.session_state:
+        if "retriever" in st.session_state:
             retriever=get_retriever()
-
-            if retriever:
             # Store LLM generated responses
-                if "messages" not in st.session_state.keys():
-                    st.session_state.messages = [{"role": "assistant", "content": "How may I help you? 👋"}]
+            if "messages" not in st.session_state.keys():
+                st.session_state.messages = [{"role": "assistant", "content": "How may I help you? 👋"}]
 
-                # Display chat messages
-                for message in st.session_state.messages:
-                    with st.chat_message(message["role"]):
-                        st.write(message["content"])
+            # Display chat messages
+            for message in st.session_state.messages:
+                with st.chat_message(message["role"]):
+                    st.write(message["content"])
 
-                # User-provided prompt
-                if prompt := st.chat_input():
-                    st.session_state.messages.append({"role": "user", "content": prompt})
-                    with st.chat_message("user"):
-                        st.write(prompt)
+            # User-provided prompt
+            if prompt := st.chat_input():
+                st.session_state.messages.append({"role": "user", "content": prompt})
+                with st.chat_message("user"):
+                    st.write(prompt)
 
-                # Generate a new response if last message is not from assistant
-                if st.session_state.messages[-1]["role"] != "assistant":
-                    try:
-                        with st.chat_message("assistant"):
-                            with st.spinner("Thinking..."):
-                                response = chat_with_csv(question=prompt, retriever=retriever)
-                                st.write_stream(stream_text(response))
-                        message = {"role": "assistant", "content": response}
-                        st.session_state.messages.append(message)
-                    except Exception as e:
-                        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
+            # Generate a new response if last message is not from assistant
+            if st.session_state.messages[-1]["role"] != "assistant":
+                try:
+                    with st.chat_message("assistant"):
+                        with st.spinner("Thinking..."):
+                            response = chat_with_csv(question=prompt, retriever=retriever)
+                            st.write_stream(stream_text(response))
+                    message = {"role": "assistant", "content": response}
+                    st.session_state.messages.append(message)
+                except Exception as e:
+                    st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
             
             
 else:

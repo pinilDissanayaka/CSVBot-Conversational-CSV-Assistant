@@ -37,7 +37,12 @@ def load_vector_store(documents):
         index_name=str(get_config()["vector_store"]["index_name"])
 
         vector_store=PineconeVectorStore.from_documents(index_name=index_name, documents=documents, embedding=embeddings)
-                
+        
+        if vector_store:
+            st.write("✅ Vector store loaded successfully!")
+        else:
+            st.write("⚠️ Vector store could not be loaded!")
+        
         return vector_store
     except Exception as e:
         st.error("🚨 Error while loading to the vector store: " + str(e.args))
