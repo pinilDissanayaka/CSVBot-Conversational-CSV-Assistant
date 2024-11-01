@@ -44,7 +44,7 @@ st.title("🦜 CSVBot : Your Conversational CSV Assistant")
 if "credentials_saved" in st.session_state:
     if st.session_state['credentials_saved']:
         try:
-            upload_files = st.file_uploader("Upload File", type=["CSV", "XLS", "XLSX", "XLSM", "XLSB"], accept_multiple_files=True, help=""" Click the button or drag and drop your CSV file here to get started. Once uploaded, you can ask questions like "What’s the average sales figure?" or "Show me all rows where region is 'North'." """)
+            upload_files = st.file_uploader("Upload File", type=["CSV"], accept_multiple_files=True, help=""" Click the button or drag and drop your CSV file here to get started. Once uploaded, you can ask questions like "What’s the average sales figure?" or "Show me all rows where region is 'North'." """)
             
             if upload_files:
                 for upload_file in upload_files:
