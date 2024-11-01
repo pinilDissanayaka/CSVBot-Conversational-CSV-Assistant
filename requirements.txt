@@ -7,4 +7,4 @@ langchain_core
 langchain-google-genai
 pyyaml
 pinecone
-
+pandas
