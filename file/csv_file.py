@@ -1,23 +1,20 @@
 import os
 from tempfile import NamedTemporaryFile
 import streamlit as st
-import pandas as pd
 from langchain_community.document_loaders import CSVLoader
 from langchain_core.documents import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 
-def load_csv(uploaded_data_frames):
+def load_csv(upload_files):
     try:
         documents=[]
-        for uploaded_data_frame in uploaded_data_frames:
+        for upload_file in upload_files:
             
             with NamedTemporaryFile(delete=False) as tmp_file:
-                tmp_file.write(uploaded_data_frame.getvalue())
+                tmp_file.write(upload_file.getvalue())
                 tmp_file_path=tmp_file.name
-            
-            df=pd.read_csv(uploaded_data_frame)
-            
+                    
             loader=CSVLoader(file_path=tmp_file_path, encoding="utf-8", csv_args={
                 'delimiter': ','})
             

@@ -59,7 +59,7 @@ if "credentials_saved" in st.session_state:
             if st.button("Submit"):
                 with st.status("Uploading files...", expanded=False):
 
-                    documents=load_csv(loaded_data_frames=upload_files)
+                    documents=load_csv(upload_files=upload_files)
                     st.write(documents)
 
                     splitted_documents=split_csv(documents=documents)
