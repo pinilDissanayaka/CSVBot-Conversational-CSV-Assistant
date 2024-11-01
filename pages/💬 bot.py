@@ -49,7 +49,7 @@ if "credentials_saved" in st.session_state:
             if upload_files:
                 for upload_file in upload_files:
                     st.write(upload_file.name)
-                    df=pd.read_csv(upload_file)
+                    df=pd.read_csv(upload_file, low_memory=False)
                     st.dataframe(df)
 
         except Exception as e:

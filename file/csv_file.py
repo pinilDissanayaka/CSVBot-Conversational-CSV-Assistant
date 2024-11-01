@@ -15,7 +15,8 @@ def save_csv(files:list, temp_dir:str):
             
             save_file = os.path.join(temp_dir, file_name)
             
-            df=pd.read_csv(file)
+            df=pd.read_csv(file, low_memory=False)
+            
             df.to_csv(save_file, index=False)
             
             saved_files.append(save_file)
