@@ -1,4 +1,5 @@
 import os
+import shutil
 import streamlit as st
 from langchain_community.document_loaders.csv_loader import CSVLoader
 from langchain_core.documents import Document
@@ -41,8 +42,8 @@ def load_csv(file_paths):
 def split_csv(documents):
     try:
         splitter=RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200, length_function=len)
-        splitted_csv=splitter.split_documents(documents=documents)
-        return splitted_csv
+        splitted_document=splitter.split_documents(documents=documents)
+        return splitted_document
     except Exception as e:
         st.error("🚨 Error while splitting files: " + str(e.args))
 

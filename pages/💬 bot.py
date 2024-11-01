@@ -55,32 +55,27 @@ if "credentials_saved" in st.session_state:
             
         if upload_files:
             if st.button("Submit"):
-                with st.status("Uploading files...", expanded=True):
+                with st.status("Uploading files...", expanded=False):
                     
-                    st.write("Creating temp directory...")
                     temp_dir=create_dir(dir="temp")
                     
-                    st.write("Saving files...")
                     saved_file=save_csv(files=upload_files, temp_dir=temp_dir)
                     st.write(saved_file)
                     
-                    st.write("Loading files...")
                     documents=load_csv(file_paths=saved_file)
+                    st.write(documents)
 
-                    st.write("Splitting files...")
                     splitted_documents=split_csv(documents=documents)
                     
                     st.write("Creating index...")
                     index_name=create_pinecone_index()
                     
                     st.write("Loading vector store...")
+                    retriever=vector_store=load_vector_store(documents=splitted_documents)
                     
-                    retriever=vector_store=load_vector_store(documents=splitted_documents, index_name=index_name)
-                    
-                    st.write("Removing temp directory...")
                     remove_files(temp_dir=temp_dir)
                     
-                if "retriever" in st.session_state:
+                if "retriever" not in st.session_state:
                     st.session_state['retriever'] = retriever
                         
 

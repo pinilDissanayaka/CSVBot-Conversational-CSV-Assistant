@@ -30,16 +30,26 @@ def create_pinecone_index()->None:
         st.error("🚨 Error while creating index: " + str(e.args))
 
 
-def load_vector_store(index_name, documents):
+def load_vector_store(documents):
     try:        
         embeddings=get_embeddings()
         
-        vector_store=PineconeVectorStore(index_name=index_name, embedding=embeddings)
-                
-        vector_store.from_documents(documents=documents, embeddings=embeddings)
+        index_name=str(get_config()["vector_store"]["index_name"])
+
+        vector_store=PineconeVectorStore.from_documents(index_name=index_name, documents=documents, embedding=embeddings)
         
         retriever=vector_store.as_retriever()
         
         return retriever
     except Exception as e:
         st.error("🚨 Error while loading to the vector store: " + str(e.args))
+        
+        
+def get_retriever():
+    try:
+        index_name=str(get_config()["vector_store"]["index_name"])
+        embeddings=get_embeddings()
+        retriever=PineconeVectorStore(index_name=index_name, embedding=embeddings)
+        return retriever
+    except Exception as e:
+        st.error("🚨 Error while getting retriever: " + str(e.args))
