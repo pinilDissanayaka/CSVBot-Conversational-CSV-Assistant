@@ -28,7 +28,7 @@ def chat_with_csv(question:str, retriever)->str:
         StrOutputParser()
     )
     
-    answer=chat_chain.invoke({"QUESTION" : question})
+    answer=chat_chain.invoke(question)
     
     return answer
 
