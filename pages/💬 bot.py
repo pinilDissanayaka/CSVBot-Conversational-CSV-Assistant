@@ -70,8 +70,6 @@ if "credentials_saved" in st.session_state:
                     st.write("Loading vector store...")
                     vector_store=load_vector_store(documents=splitted_documents)
                     
-                    remove_files(temp_dir=temp_dir)
-                    
                 if "retriever" not in st.session_state:
                     st.session_state['retriever'] = get_retriever()
                         
