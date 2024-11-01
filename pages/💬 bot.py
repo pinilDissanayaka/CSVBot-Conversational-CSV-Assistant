@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from secret import load_secrets
-from file import save_csv, load_csv, split_csv, remove_files, create_dir
+from file import load_csv, split_csv
 from vector_store import create_pinecone_index, load_vector_store, get_retriever
 from chatbot import chat_with_csv, stream_text
 import pandas as pd
