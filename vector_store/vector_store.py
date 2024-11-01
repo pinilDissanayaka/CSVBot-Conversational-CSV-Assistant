@@ -52,7 +52,7 @@ def get_retriever():
     try:
         index_name=str(get_config()["vector_store"]["index_name"])
         embeddings=get_embeddings()
-        retriever=PineconeVectorStore(index_name=index_name, embedding=embeddings)
+        retriever=PineconeVectorStore(index_name=index_name, embedding=embeddings).as_retriever()
         return retriever
     except Exception as e:
         st.error("🚨 Error while getting retriever: " + str(e.args))
