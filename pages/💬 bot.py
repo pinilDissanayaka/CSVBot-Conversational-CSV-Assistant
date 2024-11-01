@@ -58,13 +58,8 @@ if "credentials_saved" in st.session_state:
         if upload_files:
             if st.button("Submit"):
                 with st.status("Uploading files...", expanded=False):
-                    
-                    temp_dir=create_dir(dir="temp")
-                    
-                    saved_file=save_csv(files=upload_files, temp_dir=temp_dir)
-                    st.write(saved_file)
-                    
-                    documents=load_csv(file_paths=saved_file)
+
+                    documents=load_csv(loaded_data_frames=upload_files)
                     st.write(documents)
 
                     splitted_documents=split_csv(documents=documents)
