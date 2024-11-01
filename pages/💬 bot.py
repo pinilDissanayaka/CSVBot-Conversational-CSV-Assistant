@@ -4,8 +4,7 @@ from secret import load_secrets
 from file import save_csv, load_csv, split_csv, remove_files, create_dir
 from vector_store import create_pinecone_index, load_vector_store, get_retriever
 from chatbot import chat_with_csv, stream_text
-from tempfile import TemporaryDirectory
-
+import pandas as pd
 
 
 st.set_page_config(page_title="CSVBot")
@@ -48,7 +47,8 @@ if "credentials_saved" in st.session_state:
             
             if upload_files:
                 for upload_file in upload_files:
-                    st.write("File name: ", upload_file.name)
+                    df=pd.read_csv(upload_file)
+                    st.write(df)
 
         except Exception as e:
             st.error("🚨 Error while uploading files: " + str(e.args))
