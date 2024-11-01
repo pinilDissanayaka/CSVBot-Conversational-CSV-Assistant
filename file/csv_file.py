@@ -12,13 +12,9 @@ def save_csv(files:list, temp_dir:str):
         saved_files=[]
         for file in files:
             file_name = file.name
-            
             save_file = os.path.join(temp_dir, file_name)
-            
             df=pd.read_csv(file, low_memory=False)
-            
             df.to_csv(save_file, index=False)
-            
             saved_files.append(save_file)
                 
         return saved_files
