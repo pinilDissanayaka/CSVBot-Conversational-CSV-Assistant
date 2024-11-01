@@ -2,7 +2,7 @@ import os
 import streamlit as st
 from secret import load_secrets
 from file import save_csv, load_csv, split_csv, remove_files, create_dir
-from vector_store import create_pinecone_index, load_vector_store
+from vector_store import create_pinecone_index, load_vector_store, get_retriever
 from chatbot import chat_with_csv, stream_text
 from tempfile import TemporaryDirectory
 
@@ -71,16 +71,16 @@ if "credentials_saved" in st.session_state:
                     index_name=create_pinecone_index()
                     
                     st.write("Loading vector store...")
-                    retriever=vector_store=load_vector_store(documents=splitted_documents)
+                    vector_store=load_vector_store(documents=splitted_documents)
                     
                     remove_files(temp_dir=temp_dir)
                     
                 if "retriever" not in st.session_state:
-                    st.session_state['retriever'] = retriever
+                    st.session_state['retriever'] = get_retriever()
                         
 
-        if "retriever" in st.session_state:
-            retriever=st.session_state['retriever']
+        if "retriever" not in st.session_state:
+            retriever=get_retriever()
 
             if retriever:
             # Store LLM generated responses
