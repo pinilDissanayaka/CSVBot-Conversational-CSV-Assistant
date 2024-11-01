@@ -48,20 +48,8 @@ if "credentials_saved" in st.session_state:
             
             if upload_files:
                 for upload_file in upload_files:
-                    bytes_data = upload_file.getvalue()
-                    st.write(bytes_data)
-
-                    # To convert to a string based IO:
-                    stringio = StringIO(upload_file.getvalue().decode("utf-8"))
-                    st.write(stringio)
-
-                    # To read file as string:
-                    string_data = stringio.read()
-                    st.write(string_data)
-
-                    # Can be used wherever a "file-like" object is accepted:
-                    dataframe = pd.read_csv(upload_file)
-                    st.write(dataframe)
+                    df=pd.read_csv(upload_file)
+                    st.dataframe(df)
 
         except Exception as e:
             st.error("🚨 Error while uploading files: " + str(e.args))
