@@ -14,6 +14,9 @@ def load_secrets(groq_api_key=None, pinecone_api_key=None, google_api_key=None, 
             os.environ["PINECONE_API_KEY"]=pinecone_api_key
             os.environ["GOOGLE_API_KEY"]=google_api_key
             os.environ["GOOGLE_PROJECT_ID"]=google_project_id
+            
+            st.success("✅ Credentials saved!")
+            st.session_state['credentials_saved'] = True
     except Exception as e:
         st.error("🚨 Error while loading secrets: " + str(e.args))
     

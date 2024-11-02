@@ -21,18 +21,15 @@ with st.sidebar:
         else:
             st.subheader("Upload the credentials.")
             
-            groq_api_key = st.text_input("Groq API Key", "", type="password")
+            groq_api_key = st.text_input("Groq API Key", None, type="password")
             
-            pinecone_api_key= st.text_input("Pinecone API Key", "", type="password")
+            pinecone_api_key= st.text_input("Pinecone API Key", None, type="password")
             
-            google_api_key = st.text_input("Google API Key", "", type="password")
+            google_api_key = st.text_input("Google API Key", None, type="password")
             
-            google_project_id = st.text_input("Google Project ID", "", type="password")
+            google_project_id = st.text_input("Google Project ID", None, type="password")
             
-            if st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key, pinecone_api_key=pinecone_api_key, google_api_key=google_api_key, google_project_id=google_project_id)):
-                st.success("✅ Credentials saved!")
-                st.session_state['credentials_saved'] = True
-            else:
+            if not st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key, pinecone_api_key=pinecone_api_key, google_api_key=google_api_key, google_project_id=google_project_id)):
                 st.warning("⚠️ Please enter valid credentials!")
                 st.session_state['credentials_saved'] = False
                 
