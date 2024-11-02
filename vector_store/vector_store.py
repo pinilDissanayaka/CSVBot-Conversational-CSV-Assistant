@@ -28,6 +28,22 @@ def create_pinecone_index()->None:
             return index_name
     except Exception as e:
         st.error("🚨 Error while creating index: " + str(e.args))
+        
+def clear_index():
+    try:
+        pinecone=Pinecone()
+        
+        index_name=str(get_config()["vector_store"]["index_name"])
+
+        if index_name in pinecone.list_indexes().names():
+            
+            pinecone.Index(name=index_name).delete(deleteAll=True)
+            
+            st.write("✅ Index deleted successfully!")
+        else:
+            st.write("⚠️ Index does not exist!")
+    except Exception as e:
+        st.error("🚨 Error while deleting index: " + str(e.args))
 
 
 def load_vector_store(documents):

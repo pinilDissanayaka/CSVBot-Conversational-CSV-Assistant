@@ -2,7 +2,7 @@ import os
 import streamlit as st
 from secret import load_secrets
 from file import load_csv, split_csv
-from vector_store import create_pinecone_index, load_vector_store, get_retriever
+from vector_store import create_pinecone_index, load_vector_store, get_retriever, clear_index
 from chatbot import chat_with_csv, stream_text
 import pandas as pd
 from io import StringIO
@@ -38,6 +38,14 @@ with st.sidebar:
                 
     except Exception as e:
         st.error("🚨 Error while loading secrets: " + str(e.args))
+        
+    st.write("Clear Chat History")
+    if st.button("Clear Chat History"):
+        st.session_state.messages = []
+        
+    st.write("Clear Vector Store")
+    if st.button("Clear Vector Store"):
+        clear_index()
 
 st.title("🦜 CSVBot : Your Conversational CSV Assistant")
 
