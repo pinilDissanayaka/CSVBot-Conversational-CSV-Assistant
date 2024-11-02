@@ -41,7 +41,7 @@ with st.sidebar:
         
     st.write("Clear Chat History")
     if st.button("Clear Chat History"):
-        st.session_state.messages = []
+        st.session_state.messages = [{"role": "assistant", "content": "How may I help you? 👋"}]
         
     st.write("Clear Vector Store")
     if st.button("Clear Vector Store"):
