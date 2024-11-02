@@ -27,10 +27,8 @@ with st.sidebar:
             
             google_project_id = st.text_input("Google Project ID", None, type="password")
             
-            if not st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key, pinecone_api_key=pinecone_api_key, google_api_key=google_api_key, google_project_id=google_project_id)):
-                st.warning("⚠️ Please enter valid credentials!")
-                st.session_state['credentials_saved'] = False
-                
+            st.button("Save Credentials", on_click=load_secrets(groq_api_key=groq_api_key, pinecone_api_key=pinecone_api_key, google_api_key=google_api_key, google_project_id=google_project_id)):
+
     except Exception as e:
         st.error("🚨 Error while loading secrets: " + str(e.args))
         
