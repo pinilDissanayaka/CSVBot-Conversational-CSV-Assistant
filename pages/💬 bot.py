@@ -15,9 +15,7 @@ with st.sidebar:
     st.write("## Upload Credentials")
     try:
         if "GROQ_API_KEY" and "PINECONE_API_KEY" and "GOOGLE_PROJECT_ID" and "GOOGLE_API_KEY" in st.secrets:
-            st.success("✅ Credentials saved!")
             load_secrets()
-            st.session_state['credentials_saved'] = True
         else:
             st.subheader("Upload the credentials.")
             
