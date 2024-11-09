@@ -43,6 +43,7 @@ with st.sidebar:
     st.write("Clear Vector Store")
     if st.button("Clear Vector Store"):
         clear_index()
+        st.session_state.messages = [{"role": "assistant", "content": "How may I help you? 👋"}]
 
 st.title("🦜 CSVBot : Your Conversational CSV Assistant")
 
